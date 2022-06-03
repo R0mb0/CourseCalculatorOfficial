@@ -6,28 +6,28 @@ import Tools
 * Input: The strings of the two detections required from the main.
 * Output: Print the course properties.-}
 printInfo :: String -> String -> IO ()
-printInfo [] [_] = error "The First Argument Is Null"
-printInfo [_] [] = error "The Second Argument Is Null"
+printInfo [] [_] = error "The first argument is null"
+printInfo [_] [] = error "The second argument is null"
 printInfo detA detB = do
-    putStr "First Detection in Decimal Format ---> "
+    putStr "First detection in decimal format ---> "
     putStrLn (show (round3dp (head (getPoint detA)))++ "," ++ show (round3dp (getPoint detA !! 1)))
-    putStr "Second Detection in Decimal Format ---> "
+    putStr "Second detection in decimal format ---> "
     putStrLn (show (round3dp (head (getPoint detB)))++ "," ++ show (round3dp (getPoint detB !! 1)))
-    putStr "Distance between First & Second Detections ---> "
+    putStr "Distance between first & second detections ---> "
     putStrLn (show (round2dp (distance (getPoint detA) (getPoint detB))) ++ "Km")
-    putStr "Positive direction between First & Second Detections ---> "
+    putStr "Positive direction between first & second detections ---> "
     putStrLn (show (round2dp (direction (getPoint detA) (getPoint detB))) ++ "°")
-    putStr "Negative direction between First & Second Detections ---> "
+    putStr "Negative direction between first & second detections ---> "
     putStrLn (show (round2dp (invDirection (getPoint detA) (getPoint detB))) ++ "°")
     
 {-Main.-}
 main :: IO ()
 main = do
-    putStrLn "Detections Properties Calculator V1.0 \nWarning: The Detections must be in D.M.G \
+    putStrLn "Detections Properties Calculator V1.0 \nWarning: the detections must be in D.M.G \
     \format and inserted into the program like: N 40 45 36.000 - E 073 59 2.400"
-    putStrLn "Insert the First Detection..."
+    putStrLn "Insert the first detection..."
     detA <- getLine
-    putStrLn "Insert the Second Detection..."
+    putStrLn "Insert the second detection..."
     detB <- getLine 
     putStrLn "Proceed [yes/no]?"
     answ <- getLine 
