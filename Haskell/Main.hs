@@ -2,9 +2,9 @@ import Detection
 import Properties
 import Tools
 
-{-A Function to Print the Course properties.
-* Input: The Strings of the two Detections Required from the Main.
-* Output: Print the Course properties.-}
+{-A function to print the course properties.
+* Input: The strings of the two detections required from the main.
+* Output: Print the course properties.-}
 printInfo :: String -> String -> IO ()
 printInfo [] [_] = error "The First Argument Is Null"
 printInfo [_] [] = error "The Second Argument Is Null"

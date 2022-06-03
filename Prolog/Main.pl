@@ -1,4 +1,4 @@
-/***** Main & Main Util Module. *****/
+/***** Main & main util module. *****/
 
 /*Main.*/
 main :-
@@ -38,4 +38,4 @@ main :-
     ;
         write('Aborted...')
     ).
-/***** End Module. *****/
+/***** End module. *****/

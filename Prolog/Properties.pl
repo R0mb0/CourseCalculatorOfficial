@@ -1,8 +1,8 @@
-/***** Properties Module. *****/
+/***** Properties module. *****/
 
-/*Calculate the Distance Between two Detections in Decimal form.
- * Input: Two Lists containing detections in decimal form.
- * Output: An Integer number that represent the distance (in Km) between the two detections.*/
+/*Calculate the distance between two detections in decimal form.
+ * Input: Two lists containing detections in decimal form.
+ * Output: An integer number that represent the distance (in Km) between the two detections.*/
 distance([], _, _) :-
     throw(error(empty_first_input_list, distance/3)).
 distance(_, [], _) :-
@@ -52,9 +52,9 @@ distance(List1, List2, Rn) :-
         throw(error(wrong_first_input_list, List1, distance/3))
     ).
 
-/*Calculate the Direction Between two Detections in Decimal form.
- * Input: Two Lists containing detections in decimal form.
- * Output: An Integer number that represent the direction (in degrees) between the two detections.*/
+/*Calculate the direction between two detections in decimal form.
+ * Input: Two lists containing detections in decimal form.
+ * Output: An integer number that represent the direction (in degrees) between the two detections.*/
 direction([], _, _) :-
     throw(error(empty_first_input_list, direction/3)).
 direction(_, [], _) :-
@@ -120,9 +120,9 @@ direction(List1, List2, Return_num) :-
         throw(error(wrong_first_input_list, List1, direction/3))
     ).
     
-/*Calculate the Inverse Direction Between two Detections in Decimal form.
- * Input: Two Lists containing detections in decimal form.
- * Output: An Integer number that represent the inverse direction (in degrees) between the two detections.*/
+/*Calculate the inverse direction between two detections in decimal form.
+ * Input: Two lists containing detections in decimal form.
+ * Output: An integer number that represent the inverse direction (in degrees) between the two detections.*/
 inverse_direction([], _, _) :-
     throw(error(empty_first_input_list, inverse_direction/3)).
 inverse_direction(_, [], _) :-
@@ -139,4 +139,4 @@ inverse_direction(List1, List2, Return_num) :-
         throw(error(wrong_first_input_list, List1, inverse_direction/3))
     ).
     
-/***** End Module. *****/
+/***** End module. *****/
