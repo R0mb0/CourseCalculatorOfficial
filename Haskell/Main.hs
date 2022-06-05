@@ -2,6 +2,14 @@ import Detection
 import Properties
 import Tools
 
+{-Verify if the two detections inserted are different.
+* Input: Two strings.
+* Output An error if the two detections inserted aren't different, "true" otherwise.-}
+verifyDetections :: String -> String -> Bool
+verifyDetections detA detB 
+                          | detA == detB = error "Inserted the same detection twice"
+                          | otherwise = True
+
 {-A function to print the course properties.
 * Input: The strings of the two detections required from the main.
 * Output: Print the course properties.-}
@@ -31,6 +39,6 @@ main = do
     detB <- getLine 
     putStrLn "Proceed [yes/no]?"
     answ <- getLine 
-    if answ  == "yes"
+    if answ  == "yes" && verifyDetections detA detB
         then printInfo detA detB
         else putStrLn "Aborted..."

@@ -1,5 +1,15 @@
 /***** Main & main util module. *****/
 
+/*Verify if the two detections inserted are different.
+* Input: Two Lists.
+* Output An error if the two detections inserted aren't different, "true" otherwise.*/
+verify_detections(List1, List2) :-
+    (List1 == List2 -> 
+        throw(error(inserted_the_same_detection_twice, verify_detections/2))
+    ;
+        true
+    )
+
 /*Main.*/
 main :-
     consult('ListTools.pl'),
@@ -16,6 +26,7 @@ main :-
     write('Proceed [yes./no.]?'), nl,
     read(C),
     (C == 'yes' ->
+        verify_detections(Det1, Det2),
         write('First detection in decimal format ---> '),
         get_point(Det1, P1),
         index(0, P1, Dlat1),

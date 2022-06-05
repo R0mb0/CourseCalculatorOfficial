@@ -4,7 +4,7 @@
  * Input: A list.
  * Output: "true" if the input string has the right lenght, "false" otherwise.*/
 verify_lenght([]) :-
-    throw(error(empty_input_list, verify_lenght/2)).
+    throw(error(empty_input_list, verify_lenght/1)).
 verify_lenght(List) :-
     list(List),
     length(List, N),
@@ -22,7 +22,7 @@ verify_lenght(List) :-
  * Input: A list.
  * Output: "true" if the input string is in the right format, "false" otherwise.*/
 verify_format([]) :-
-    throw(error(empty_input_list, verify_format/2)).
+    throw(error(empty_input_list, verify_format/1)).
 verify_format(List) :-
     list(List),
     (verify_lenght(List) -> 
@@ -69,7 +69,7 @@ verify_format(List) :-
         )
     ;
         atom_chars(Print, List),
-        throw(error(invalid_argument, Print, verify_format/2))
+        throw(error(invalid_argument, Print, verify_format/1))
     ). 
 
 /*Verify if the latitude degrees are real.
@@ -217,7 +217,7 @@ get_longitude(List, Final_list) :-
  * Input: A list containing a latitude/longitude.
  * Output: "true" if the body is right, an error otherwise.*/
 verify_coordinate_body([]) :-
-    throw(error(empty_input_list, verify_coordinate_body/2)).
+    throw(error(empty_input_list, verify_coordinate_body/1)).
 verify_coordinate_body(List) :-
     list(List),
     index(2, List, Primes),
@@ -226,10 +226,10 @@ verify_coordinate_body(List) :-
         (verify_latters(Latters) -> 
             true
         ;
-            throw(error(wrong_latters_in, List, verify_coordinate_body/2))
+            throw(error(wrong_latters_in, List, verify_coordinate_body/1))
         )
     ;
-        throw(error(wrong_primes_in, List, verify_coordinate_body/2))
+        throw(error(wrong_primes_in, List, verify_coordinate_body/1))
     ).
 
 /*Convert the sign of the coordinate into a number for the decimal conversion the coordinate.
