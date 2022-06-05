@@ -8,7 +8,7 @@ verify_detections(List1, List2) :-
         throw(error(inserted_the_same_detection_twice, verify_detections/2))
     ;
         true
-    )
+    ).
 
 /*Main.*/
 main :-
