@@ -2,13 +2,12 @@
 
 /*Verify if the two detections inserted are different.
 * Input: Two Lists.
-* Output An error if the two detections inserted aren't different, "true" otherwise.*/
+* Output An error if the two detections inserted aren't different.*/
 verify_detections(List1, List2) :-
-    (List1 == List2 -> 
-        throw(error(inserted_the_same_detection_twice, verify_detections/2))
-    ;
-        true
-    ).
+    List1 == List2,
+    throw(error(inserted_the_same_detection_twice, verify_detections/2)).
+verify_detections(List1, List2) :-
+    \+(List1 == List2).
 
 /*Main.*/
 main :-
