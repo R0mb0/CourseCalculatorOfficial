@@ -7,14 +7,14 @@ index(_, [], _) :-
     throw(error(empty_input_list, index/3)).
 index(0, [X], X).
 index(0, [H|_], H).
+index(N, [_], _) :-
+    integer(N),
+    N < 0,
+    throw(error(negative_index, N, index/3)).
 index(N, [_|T], E) :-
     integer(N),
-    (N < 0 ->
-        throw(error(negative_index, N, index/3))
-    ;
-        N1 is N - 1, 
-        index(N1, T, E)
-    ).
+    N1 is N - 1, 
+    index(N1, T, E).
 
 /*Like the head function in Haskell. 
  * Input: A list.
@@ -43,16 +43,17 @@ drop(0, List, Final_list) :-
 drop(1, List, Final_list) :-
     list(List),
     tail(List, Final_list).
+drop(N, List, _) :-
+    integer(N),
+    list(List),
+    N < 0,
+    throw(error(negative_parameter, N, drop/3)).
 drop(N, List, Final_list) :-
     integer(N),
     list(List),
-    (N < 0 ->
-        throw(error(negative_parameter, N, drop/3))
-    ;
-        N1 is N - 1,
-        tail(List, Rlist),
-        drop(N1, Rlist, Final_list)
-    ).
+    N1 is N - 1,
+    tail(List, Rlist),
+    drop(N1, Rlist, Final_list).
 
 /*Like the init function in Haskell. 
  * Input: A list.
@@ -77,16 +78,17 @@ remove_from_tail(0, List, Final_list) :-
 remove_from_tail(1, List, Final_list) :-
     list(List),
     init(List, Final_list).
+remove_from_tail(N, List, _) :-
+    integer(N),
+    list(List),
+    N < 0,
+    throw(error(negative_parameter, N, remove_from_tail/3)).
 remove_from_tail(N, List, Final_list) :-
     integer(N),
     list(List),
-    (N < 0 -> 
-        throw(error(negative_parameter, N, remove_from_tail/3))
-    ;
-        N1 is N - 1,
-        init(List, List1),
-        remove_from_tail(N1, List1, Final_list)
-    ).
+    N1 is N - 1,
+    init(List, List1),
+    remove_from_tail(N1, List1, Final_list).
 
 /*Like the take function in Haskell. 
  * Input: An integer number, a list.
@@ -94,15 +96,16 @@ remove_from_tail(N, List, Final_list) :-
 take(_, [], _) :-
     throw(error(empty_input_list, take/3)).
 take(_, [X], X).
+take(N, List, _) :-
+    integer(N),
+    list(List),
+    N < 0,
+    throw(error(negative_parameter, N, take_list/3)).
 take(N, List, Final_list) :-
     integer(N),
     list(List),
-    (N < 0 ->
-        throw(error(negative_parameter, N, take_list/3))
-    ;
-        length(List, Len),
-        N1 is Len - N,
-        remove_from_tail(N1, List, Final_list)
-    ).
+    length(List, Len),
+    N1 is Len - N,
+    remove_from_tail(N1, List, Final_list).
 
 /***** End module. *****/
