@@ -101,7 +101,7 @@ split(List, _) :-
     
 /*Transform the input string containing the latitude part into a latitude list, [sign, degrees, primes, latters].
  * Input: A list.
- * Output: A list containing the latitude.*/
+ * Output: A list containing the latitude, an error otherwise.*/
 get_latitude([], _) :-
     throw(error(empty_input_list, get_latitude/2)).
 get_latitude(List, _) :-
@@ -125,7 +125,7 @@ get_latitude(List, Final_list) :-
 
 /*Transform the input string containing the longitude part into a longitude list, [sign, degrees, primes, latters].
  * Input: A list.
- * Output: A list containing the longitude.*/
+ * Output: A list containing the longitude, an error otherwise.*/
 get_longitude([], _) :-
     throw(error(empty_input_list, get_longitude/2)).
 get_longitude(List, _) :-
