@@ -39,7 +39,7 @@ verifyFormat st
 {-Get the latitude tupla from the detection string.
 * Input: A detection string.
 * Output: A tupla containing the latitude in D.M.G. format,
-   (sign, degrees, primes, latters).-}
+   (sign, degrees, primes, seconds).-}
 getLatitude :: String -> (Char, Int, Int, Float)
 getLatitude [] = error "Null argument"
 getLatitude st
@@ -49,7 +49,7 @@ getLatitude st
 {-Get the longitude tupla from the detection string.
 * Input: A detection string.
 * Output: A tupla containing the longitude in D.M.G. format,
-   (sign, degrees, primes, latters).-}
+   (sign, degrees, primes, seconds).-}
 getLongitude :: String -> (Char, Int, Int, Float)
 getLongitude [] = error "Null argument"
 getLongitude st
@@ -81,11 +81,11 @@ verifyLongDeg (s, x, y, z)
 {-Verify the latitude/longitude tupla body,
    (In this case the degrees of the body aren't valutated).
  * Input: A latitude or longitude tupla.
- * Output: A boolean that is "True" if the primes & latters are real. False otherwise.-}
+ * Output: A boolean that is "True" if the primes & seconds are real. False otherwise.-}
 verifyDetBody :: (Char, Int, Int, Float) -> Bool
 verifyDetBody (s, x, y, z)
                           | y < 0 || y > 59 = error ("Wrong primes in: " ++ pt)
-                          | z < 0 || z > 59 = error ("Wrong latters in: " ++ pt)
+                          | z < 0 || z > 59 = error ("Wrong seconds in: " ++ pt)
                           | otherwise = True 
                           where
                               pt = " " ++ show s ++ " " ++ show x ++ " " ++ show y++ " " ++ show z

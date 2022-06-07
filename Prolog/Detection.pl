@@ -59,10 +59,10 @@ verify_primes(Num) :-
     (Num >= 0),
     (Num =< 59).
 
-/*Verify if the latters of detection are real.
+/*Verify if the seconds of detection are real.
  * Input: An integer or float number.
- * Output: "true" if the latters are real.*/
-verify_latters(Num) :-
+ * Output: "true" if the seconds are real.*/
+verify_seconds(Num) :-
     number(Num),
     (Num >= 0),
     (Num =< 59).
@@ -88,7 +88,7 @@ split(List, Final_list) :-
     Len >= 17,
     drop(17, List, Final_list).
     
-/*Transform the input string containing the latitude part into a latitude list, [sign, degrees, primes, latters].
+/*Transform the input string containing the latitude part into a latitude list, [sign, degrees, primes, seconds].
  * Input: A list.
  * Output: A list containing the latitude, an error otherwise.*/
 get_latitude(List, _) :-
@@ -107,10 +107,10 @@ get_latitude(List, Final_list) :-
     number_chars(Primes, D),
     take(14, List, E),
     drop(8, E, F),
-    number_chars(Latters, F),
-    Final_list = [Sign, Degrees, Primes, Latters].
+    number_chars(seconds, F),
+    Final_list = [Sign, Degrees, Primes, seconds].
 
-/*Transform the input string containing the longitude part into a longitude list, [sign, degrees, primes, latters].
+/*Transform the input string containing the longitude part into a longitude list, [sign, degrees, primes, seconds].
  * Input: A list.
  * Output: A list containing the longitude, an error otherwise.*/
 get_longitude(List, _) :-
@@ -130,8 +130,8 @@ get_longitude(List, Final_list) :-
     number_chars(Primes, D),
     take(15, List1, E),
     drop(9, E, F),
-    number_chars(Latters, F),
-    Final_list = [Sign, Degrees, Primes, Latters].
+    number_chars(seconds, F),
+    Final_list = [Sign, Degrees, Primes, seconds].
 
 /*Verify if the coordinate body is right,
    (in this case the body is the entire coordinate without the sign & degrees),
@@ -142,16 +142,16 @@ verify_coordinate_body(List) :-
     list(List),
     nth(3, List, Primes),
     verify_primes(Primes),
-    nth(4, List, Latters),
-    verify_latters(Latters).
+    nth(4, List, seconds),
+    verify_seconds(seconds).
 verify_coordinate_body(List) :-
     nth(3, List, Primes),
     \+(verify_primes(Primes)),
     throw(error(wrong_primes_in, List, verify_coordinate_body/1)).
 verify_coordinate_body(List) :-
-    nth(4, List, Latters),
-    \+(verify_latters(Latters)),
-    throw(error(wrong_latters_in, List, verify_coordinate_body/1)).
+    nth(4, List, seconds),
+    \+(verify_seconds(seconds)),
+    throw(error(wrong_seconds_in, List, verify_coordinate_body/1)).
 
 /*Convert the sign of the coordinate into a number for the decimal conversion the coordinate.
  * Input: A character.
@@ -170,8 +170,8 @@ convert_to_decimal(List, Return_num) :-
     check_sign(Sign, Sign1),
     nth(2, List, Degrees),
     nth(3, List, Primes),
-    nth(4, List, Latters),
-    A is Latters / 60,
+    nth(4, List, seconds),
+    A is seconds / 60,
     B is Primes + A,
     C is B / 60,
     D is C + Degrees,

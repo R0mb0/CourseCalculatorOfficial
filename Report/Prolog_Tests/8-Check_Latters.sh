@@ -7,4 +7,4 @@ Insert the second detection...
 Proceed [yes./no.]?
 yes.
 First detection in decimal format ---> 
-uncaught exception: error(wrong_latters_in,['E',12,54,60.0],verify_coordinate_body/1)
+uncaught exception: error(wrong_seconds_in,['E',12,54,60.0],verify_coordinate_body/1)
