@@ -1,6 +1,7 @@
 \documentclass{article}
 \usepackage[italian]{babel}
 \usepackage[utf8]{inputenc}
+\usepackage{listingsutf8}
 \usepackage[margin=75pt]{geometry}
 \usepackage{amsmath}
 \usepackage{graphicx}
@@ -103,6 +104,7 @@ Il rilevamento immesso dall'utente è rappresentato sotto forma di "stringa", pe
 \begin{enumerate}
 	\item Acquisizione del primo rilevamento.
 	\item  Acquisizione del secondo rilevamento.
+	\item Verifica se i due rilevamenti acquisiti sono differenti.
 	
 	\item Controllo della validità dei rilevamenti:
 	\begin{enumerate}
@@ -148,6 +150,13 @@ Il rilevamento immesso dall'utente è rappresentato sotto forma di "stringa", pe
 \underline{File sorgente \textbf{Properties.hs:}}
 \lstinputlisting[language=Haskell]{../Haskell/Properties.hs}
 
+\underline{File sorgente \textbf{Tools.hs:}}
+\lstinputlisting[language=Haskell]{../Haskell/Tools.hs}
+
+\lstset{inputencoding=utf8/latin1}
+\underline{File sorgente \textbf{Main.hs:}}
+\lstinputlisting[language=Haskell]{../Haskell/Main.hs}
+
 \newpage
 \raggedright
 \underline{File sorgente \textbf{Detection.pl:}}
@@ -155,48 +164,64 @@ Il rilevamento immesso dall'utente è rappresentato sotto forma di "stringa", pe
 
 \underline{File sorgente \textbf{Properties.pl:}}
 \lstinputlisting[language=Prolog]{../Prolog/Properties.pl}
+
+\underline{File sorgente \textbf{ListTools.pl:}}
+\lstinputlisting[language=Prolog]{../Prolog/ListTools.pl}
+
+\lstset{inputencoding=utf8/latin1}
+\underline{File sorgente \textbf{Main.pl:}}
+\lstinputlisting[language=Prolog]{../Prolog/Main.pl}
 \newpage
 
 \section{Testing del Programma}
 \subsection*{Test Haskell 1}
 
+\lstset{inputencoding=utf8/latin1}
 \lstinputlisting[language=]{Haskell_Tests/1-Duplicate_Detections.sh}
 
 \subsection*{Test Haskell 2}
 
+\lstset{inputencoding=utf8/latin1}
 \lstinputlisting[language=]{Haskell_Tests/2-String_Formatting.sh}
-
 
 \subsection*{Test Haskell 3}
 
+\lstset{inputencoding=utf8/latin1}
 \lstinputlisting[language=]{Haskell_Tests/3-Check_Sign.sh}
 
 \subsection*{Test Haskell 4}
 
+\lstset{inputencoding=utf8/latin1}
 \lstinputlisting[language=]{Haskell_Tests/4-Check_Sign.sh}
 
 \subsection*{Test Haskell 5}
 
+\lstset{inputencoding=utf8/latin1}
 \lstinputlisting[language=]{Haskell_Tests/5-Check_Sign.sh}
 
 \subsection*{Test Haskell 6}
 
+\lstset{inputencoding=utf8/latin1}
 \lstinputlisting[language=]{Haskell_Tests/6-Check_Degrees.sh}
 
 \subsection*{Test Haskell 7}
-	
+
+\lstset{inputencoding=utf8/latin1}
 \lstinputlisting[language=]{Haskell_Tests/7-Check_Primes.sh}
 
 \subsection*{Test Haskell 8}
 
+\lstset{inputencoding=utf8/latin1}
 \lstinputlisting[language=]{Haskell_Tests/8-Check_Latters.sh}
 
 \subsection*{Test Haskell 9}
 
+\lstset{inputencoding=utf8/latin1}
 \lstinputlisting[language=]{Haskell_Tests/9-Check_Critical_Case.sh}
 
 \subsection*{Test Haskell 10}
-	
+
+\lstset{inputencoding=utf8/latin1}
 \lstinputlisting[language=]{Haskell_Tests/10-Calculation_of_Distant_Coordinates.sh}
 	
 	\bigskip
@@ -205,151 +230,55 @@ Il rilevamento immesso dall'utente è rappresentato sotto forma di "stringa", pe
 	
 \newpage
 \subsection*{Test Prolog 1}
-	\begin{spverbatim}
-		Detections Properties Calculator V1.0
-		Warning: The Detections must be in D.M.G format and inserted into the program like: `N 40 45 36.000 - E 073 59 2.400`.
-		Insert the First Detection...
-		`43 54 16.000  E 012 54 30.000`.
-		Insert the Second Detection...
-		`N 43 54 17.000 - E 012 54 40.000`.
-		Proceed [yes./no.]?
-		yes.
-		First Detection in Decimal Format ---> 
-		uncaught exception: error(invalid_argument,'43 54 16.000  E 012 54 30.000',verify_format/2)
-	\end{spverbatim}
+
+\lstset{inputencoding=utf8/latin1}
+\lstinputlisting[language=]{Prolog_Tests/1-Duplicate_Detections.sh}
 
 \subsection*{Test Prolog 2}
-	\begin{spverbatim}
-		Detections Properties Calculator V1.0
-		Warning: The Detections must be in D.M.G format and inserted into the program like: `N 40 45 36.000 - E 073 59 2.400`.
-		Insert the First Detection...
-		`N 43 54 16.000 - E 012 54 30`.
-		Insert the Second Detection...
-		`N 43 54 17.000 - E 012 54 40.000`.
-		Proceed [yes./no.]?
-		yes.
-		First Detection in Decimal Format ---> 
-		uncaught exception: error(invalid_argument,'N 43 54 16.000 - E 012 54 30',verify_format/2)
-	\end{spverbatim}
+
+\lstset{inputencoding=utf8/latin1}
+\lstinputlisting[language=]{Prolog_Tests/2-String_Formatting.sh}
 
 \subsection*{Test Prolog 3}
-	\begin{spverbatim}
-		Detections Properties Calculator V1.0
-		Warning: The Detections must be in D.M.G format and inserted into the program like: `N 40 45 36.000 - E 073 59 2.400`.
-		Insert the First Detection...
-		`T 43 54 16.000 - E 012 54 30.000`.
-		Insert the Second Detection...
-		`N 43 54 17.000 - E 012 54 40.000`.
-		Proceed [yes./no.]?
-		yes.
-		First Detection in Decimal Format ---> 
-		uncaught exception: error(wrong_sign_in,['T',43,54,16.0],get_point/2)
-	\end{spverbatim}
+
+\lstset{inputencoding=utf8/latin1}
+\lstinputlisting[language=]{Prolog_Tests/3-Check_Sign.sh}
 
 \subsection*{Test Prolog 4}
-	\begin{spverbatim}
-		Detections Properties Calculator V1.0
-		Warning: The Detections must be in D.M.G format and inserted into the program like: `N 40 45 36.000 - E 073 59 2.400`.
-		Insert the First Detection...
-		`N 43 54 16.000 - T 012 54 30.000`.
-		Insert the Second Detection...
-		`N 43 54 17.000 - E 012 54 40.000`.
-		Proceed [yes./no.]?
-		yes.
-		First Detection in Decimal Format ---> 
-		uncaught exception: error(wrong_sign_in,['T',12,54,30.0],get_point/2)
-	\end{spverbatim}
+
+\lstset{inputencoding=utf8/latin1}
+\lstinputlisting[language=]{Prolog_Tests/4-Check_Sign.sh}
 
 \subsection*{Test Prolog 5}
-	\begin{spverbatim}
-		Detections Properties Calculator V1.0
-		Warning: The Detections must be in D.M.G format and inserted into the program like: `N 40 45 36.000 - E 073 59 2.400`.
-		Insert the First Detection...
-		`E 43 54 16.000 - N 012 54 30.000`.
-		Insert the Second Detection...
-		`N 43 54 17.000 - E 012 54 40.000`.
-		Proceed [yes./no.]?
-		yes.
-		First Detection in Decimal Format ---> 
-		uncaught exception: error(wrong_sign_in,['E',43,54,16.0],get_point/2)
-	\end{spverbatim}
+
+\lstset{inputencoding=utf8/latin1}
+\lstinputlisting[language=]{Prolog_Tests/5-Check_Sign.sh}
 
 \subsection*{Test Prolog 6}
-	\begin{spverbatim}
-		Detections Properties Calculator V1.0
-		Warning: The Detections must be in D.M.G format and inserted into the program like: `N 40 45 36.000 - E 073 59 2.400`.
-		Insert the First Detection...
-		`N 90 54 16.000 - E 012 54 30.000`.
-		Insert the Second Detection...
-		`N 43 54 17.000 - E 012 54 40.000`.
-		Proceed [yes./no.]?
-		yes.
-		First Detection in Decimal Format ---> 
-		uncaught exception: error(wrong_degrees_in,['N',90,54,16.0],get_point/2)
-	\end{spverbatim}
+
+\lstset{inputencoding=utf8/latin1}
+\lstinputlisting[language=]{Prolog_Tests/6-Check_Degrees.sh}
 
 \subsection*{Test Prolog 7}
-	\begin{spverbatim}
-		Detections Properties Calculator V1.0
-		Warning: The Detections must be in D.M.G format and inserted into the program like: `N 40 45 36.000 - E 073 59 2.400`.
-		Insert the First Detection...
-		`N 43 54 17.000 - E 012 54 40.000`.
-		Insert the Second Detection...
-		`N 43 -4 16.000 - E 012 54 30.000`.
-		Proceed [yes./no.]?
-		yes.
-		First Detection in Decimal Format ---> 43.905,12.911
-		Second Detection in Decimal Format ---> 
-		uncaught exception: error(wrong_primes_in,['N',43,-4,16.0],verify_coordinate_body/2)
-	\end{spverbatim}
+
+\lstset{inputencoding=utf8/latin1}
+\lstinputlisting[language=]{Prolog_Tests/7-Check_Primes.sh}
 
 \subsection*{Test Prolog 8}
-	\begin{spverbatim}
-		Detections Properties Calculator V1.0
-		Warning: The Detections must be in D.M.G format and inserted into the program like: `N 40 45 36.000 - E 073 59 2.400`.
-		Insert the First Detection...
-		`N 43 54 16.000 - E 012 54 60.000`.
-		Insert the Second Detection...
-		`N 43 54 17.000 - E 012 54 40.000`.
-		Proceed [yes./no.]?
-		yes.
-		First Detection in Decimal Format ---> 
-		uncaught exception: error(wrong_latters_in,['E',12,54,60.0],verify_coordinate_body/2)
-	\end{spverbatim}
+
+\lstset{inputencoding=utf8/latin1}
+\lstinputlisting[language=]{Prolog_Tests/8-Check_Latters.sh}
 
 \subsection*{Test Prolog 9}
-	\begin{spverbatim}
-		Detections Properties Calculator V1.0
-		Warning: The Detections must be in D.M.G format and inserted into the program like: `N 40 45 36.000 - E 073 59 2.400`.
-		Insert the First Detection...
-		`N 43 54 16.000 - E 012 54 30.000`.
-		Insert the Second Detection...
-		`N 43 54 16.000 - E 012 54 40.000`.
-		Proceed [yes./no.]?
-		yes.
-		First Detection in Decimal Format ---> 43.904,12.908
-		Second Detection in Decimal Format ---> 43.904,12.911
-		Distance between First & Second Detections ---> 0.22Km
-		Positive direction between First & Second Detections ---> 90.00°
-		Negative direction between First & Second Detections ---> 270.00°
-	\end{spverbatim}
+
+\lstset{inputencoding=utf8/latin1}
+\lstinputlisting[language=]{Prolog_Tests/9-Check_Critical_Case.sh}
 
 \subsection*{Test Prolog 10}
-	\begin{spverbatim}
-		Detections Properties Calculator V1.0
-		Warning: The Detections must be in D.M.G format and inserted into the program like: `N 40 45 36.000 - E 073 59 2.400`.
-		Insert the First Detection...
-		`N 40 45 36.000 - W 073 59 02.400`.
-		Insert the Second Detection...
-		`N 38 53 24.000 - W 077 01 55.200`.
-		Proceed [yes./no.]?
-		yes.
-		First Detection in Decimal Format ---> 40.760,-73.984
-		Second Detection in Decimal Format ---> 38.890,-77.032
-		Distance between First & Second Detections ---> 333.21Km
-		Positive direction between First & Second Detections ---> 51.38°
-		Negative direction between First & Second Detections ---> 231.38°
-	\end{spverbatim}
+
+\lstset{inputencoding=utf8/latin1}
+\lstinputlisting[language=]{Prolog_Tests/10-Calculation_of_Distant_Coordinates.sh}
+
 	\bigskip
 	Immagine presa dal sito \href{https://www.sunearthtools.com/it/tools/distance.php}{"SunEarthTools.com"}, per la verifica dei risultati riportati dal programma:\\
 	\includegraphics[width=0.9\textwidth]{Prolog_Tests/10-Calculation_of_Distant_Coordinates_Check}
@@ -360,175 +289,15 @@ Il rilevamento immesso dall'utente è rappresentato sotto forma di "stringa", pe
 
 Il linguaggio Haskell e il programma Prolog non condividono gli stessi strumenti di gestione della struttura dati lista, infatti il Prolog deficita di strumenti come: "index", "drop", "init" e "take", presenti invece nel linguaggio Haskell.\\
 Per fare in modo che i due programmi condividessero delle funzioni/predicati quanto più simili possibile, sono stati implementati gli strumenti di cui il Prolog deficita.\\
-\bigskip
-\underline{File sorgente \textbf{ListTools.pl:}}
-\lstset{language=Prolog}
-\begin{lstlisting}
-/***** List Tools Module. *****/
+%\bigskip
+%\underline{File sorgente \textbf{ListTools.pl:}}
+%\lstinputlisting[language=Prolog]{../Prolog/ListTools.pl}
 
-/*Like the index Function in Haskell. 
- * Input: An integer Index, a List.
- * Output: The Element of the List at the Index Specified.*/
-index(_, [], _) :-
-    throw(error(empty_input_list, index/3)).
-index(0, [X], X).
-index(0, [H|_], H).
-index(N, [_|T], E) :- 
-    (integer(N) ->
-        (N < 0 ->
-            throw(error(negative_index, N, index/3))
-        ;
-            N1 is N - 1, 
-            index(N1, T, E)
-        )
-    ;
-        throw(error(not_integer_index, N, index/3))
-    ).
-
-/*Like the head Function in Haskell. 
- * Input: A List.
- * Output: The First Element of List.*/
-head([], _) :-
-    throw(error(empty_input_list, head/2)).
-head([H], H).
-head([H|_], H).
-
-/*Like the tail Function in Haskell. 
- * Input: A List.
- * Output: A List without the first element.*/
-tail([], _) :-
-    throw(error(empty_input_list, tail/2)).
-tail([T], T).
-tail([_|T], T).
-
-/*Like the drop Function in Haskell. 
- * Input: An Integer number, a List.
- * Output: A List without the number of elements specified from the head.*/
-drop(_, [], _) :-
-    throw(error(empty_input_list, drop/3)).
-drop(0, List, Final_list) :-
-    (list(List) -> 
-        Final_list = List
-    ;
-        throw(error(wrong_input_list, List, drop/3))
-    ).
-drop(1, List, Final_list) :-
-    (list(List) -> 
-        tail(List, Final_list)
-    ;
-        throw(error(wrong_input_list, List, drop/3))
-    ).
-drop(N, List, Final_list) :-
-    (integer(N) -> 
-        (list(List) ->
-            (N < 0 ->
-                throw(error(negative_parameter, N, drop/3))
-            ;
-                N1 is N - 1,
-                tail(List, Rlist),
-                drop(N1, Rlist, Final_list)
-            )
-        ;
-            throw(error(wrong_input_list, List, drop/3))
-        )
-    ;
-        throw(error(wrong_input_number, N, drop/3))
-    ).
-
-/*Like the init Function in Haskell. 
- * Input: A List.
- * Output: A List without the last element.*/
-init([], _) :-
-    throw(error(empty_input_list, init/2)).
-init([X], X).
-init(List, Final_list) :-
-    (list(List) -> 
-        reverse(List, [_|List1]), 
-        reverse(List1, Final_list)
-    ;
-        throw(error(wrong_input_list, List, init/2))
-    ).
-    
-/*Remove Ns Elements From the Input List.
- * Input: An Integer number, a List.
- * Output: A List without the number of elements specified from the tail.*/
-remove_from_tail(_, [], _) :-
-    throw(error(empty_input_list, remove_from_tail/3)).
-remove_from_tail(_, [_], []).
-remove_from_tail(0, List, Final_list) :-
-    (list(List) -> 
-        Final_list = List
-    ;
-        throw(error(wrong_input_list, List, remove_from_tail/3))
-    ).
-remove_from_tail(1, List, Final_list) :-
-    (list(List) -> 
-        init(List, Final_list)
-    ;
-        throw(error(wrong_input_list, List, remove_from_tail/3))
-    ).
-remove_from_tail(N, List, Final_list) :-
-    (integer(N) -> 
-        (list(List) ->
-            (N < 0 -> 
-                throw(error(negative_parameter, N, remove_from_tail/3))
-            ;
-                N1 is N - 1,
-                init(List, List1),
-                remove_from_tail(N1, List1, Final_list)
-            )
-        ;
-            throw(error(wrong_input_list, List, remove_from_tail/3))
-        )
-    ;
-        throw(error(wrong_input_number, N, remove_from_tail/3))
-    ).
-
-/*Like the take Function in Haskell. 
- * Input: An Integer number, a List.
- * Output: A List with only the number of elements specified from the head.*/
-take(_, [], _) :-
-    throw(error(empty_input_list, take/3)).
-take(_, [X], X).
-take(N, List, Final_list) :-
-    (integer(N) ->
-        (list(List) -> 
-            (N < 0 ->
-                throw(error(negative_parameter, N, take_list/3))
-            ;
-                length(List, Len),
-                N1 is Len - N,
-                remove_from_tail(N1, List, Final_list)
-            )
-        ;
-            throw(error(wrong_input_list, List, take/3))
-        )
-    ;
-        throw(error(wrong_input_number, N, take/3))
-    ).
-    
-/***** End Module. *****/
-\end{lstlisting}
 
 Nel programma Haskell per stampare a video i risultati delle operazioni approssimate a dei decimali specifici, è stato necessario implementare delle funzioni per l'approssimazione dei numeri ad un certo decimale, mentre nel caso del programma Prolog è già presente il predicato "format" che approssima i numeri al decimale richiesto.\\
-\bigskip
-\underline{File sorgente \textbf{Tools.hs:}}
-\lstset{language=Haskell}
-\begin{lstlisting}
-module Tools where
-
-{-Function to Round a Number to 3 Decimals After the Comma.
-* Input: A Dobule Number.
-* Output: A Double Number Containing the Input Number Rounded.-}
-round3dp :: Double -> Double
-round3dp x = fromIntegral (round $ x * 1e3) / 1e3
-
-{-Function to Round a Number to 2 Decimals After the Comma.
-* Input: A Dobule Number.
-* Output: A Double Number Containing the Input Number Rounded.-}
-round2dp :: Double -> Double
-round2dp x = fromIntegral (round $ x * 1e2) / 1e2
-\end{lstlisting}
+%\bigskip
+%\underline{File sorgente \textbf{Tools.hs:}}
+%\lstinputlisting[language=Haskell]{../Haskell/Tools.hs}
 
 Nel programma Prolog a differenza del programma Haskell è necessario verificare esplicitamente che ogni argomento in input sia istanziato e che rispetti il tipo di dato richiesto. Nel programma Haskell invece il controllo viene effettuato automaticamente dal sistema di tipi.\\
 Inoltre nel programma Prolog a differenza del programma Haskell l'inserimento di una stringa contenente degli spazi comporta che quest'ultima sia compresa tra apici oppure tra il simbolo dell'apostrofo, in modo che l'inserimento venga considerato come un "dato atomico",  facendo sì che i caratteri di spazio non rappresentino più un problema d'interpretazione.
