@@ -7,7 +7,7 @@ verify_detections(List1, List2) :-
     List1 == List2,
     throw(error(inserted_the_same_detection_twice, verify_detections/2)).
 verify_detections(List1, List2) :-
-    \+(List1 == List2).
+    (List1 \== List2).
 
 /*Main.*/
 main :-
@@ -28,13 +28,13 @@ main :-
         verify_detections(Det1, Det2),
         write('First detection in decimal format ---> '),
         get_point(Det1, P1),
-        index(0, P1, Dlat1),
-        index(1, P1, Dlong1),
+        nth(1, P1, Dlat1),
+        nth(2, P1, Dlong1),
         format('~3f', [Dlat1]), write(','), format('~3f', [Dlong1]), nl,
         write('Second detection in decimal format ---> '),
         get_point(Det2, P2),
-        index(0, P2, Dlat2),
-        index(1, P2, Dlong2),
+        nth(1, P2, Dlat2),
+        nth(2, P2, Dlong2),
         format('~3f', [Dlat2]), write(','), format('~3f', [Dlong2]), nl,
         write('Distance between first & second detections ---> '),
         distance(P1, P2, Distance),
