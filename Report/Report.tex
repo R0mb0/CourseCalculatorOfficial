@@ -96,7 +96,7 @@ Dato l'inserimento di due rilevamenti nel formato prima specificato, le operazio
 
 \section{Progettazione dell'Algoritmo}
 \subsection{Scelte di Progetto}
-Il rilevamento immesso dall'utente è rappresentato sotto forma di "stringa", pertanto il rilevamento è gestibile come una lista di caratteri di tipo "char". Le varie parti d'interesse sulla lista, vengono estratte a della posizioni precise (per esempio si suppone che il segno della prima coordinata si trovi nella posizione due della lista).  Siccome le informazioni vengono estratte dalla lista a delle posizioni precedentemente stabilite (quindi senza controllare la presenza di certi simboli per la ricerca delle parti d'interesse sulla lista), si controlla che quest'ultima sia precisamente di trentadue caratteri (considerando anche gli spazi) e nel formato corretto.\\
+Il rilevamento immesso dall'utente è rappresentato sotto forma di "stringa", pertanto il rilevamento è gestibile come una lista di caratteri di tipo "char". Le varie parti d'interesse sulla lista, vengono estratte a delle posizioni precise (per esempio si suppone che il segno della prima coordinata si trovi nella posizione uno della lista).  Siccome le informazioni vengono estratte dalla lista a delle posizioni precedentemente stabilite (quindi senza controllare la presenza di certi simboli per la ricerca delle parti d'interesse sulla lista), si controlla che quest'ultima sia precisamente di trentadue caratteri (considerando anche gli spazi) e nel formato corretto.\\
  Un'ulteriore decisione architetturale è stata presa nella gestione delle singole coordinate, infatti la latitudine e la longitudine individuate all'interno della lista di caratteri "char" vengono convertite rispettivamente in due "tuple" distinte definite come segue: (Char, Integer, Integer, Float) ovvero (Segno, Gradi, Primi, Secondi), in modo da poter semplificare l'implementazione delle funzioni/predicati atti alla conversione delle coordinate dal formato D.M.G internazionale al formato decimale. Nel caso specifico del Prolog al posto delle "tuple" vengono utilizzate delle liste formate da elementi atomici definite come segue:  [Segno, Gradi, Primi, Secondi].
  
 \subsection{Passi dell'Algoritmo}
@@ -121,11 +121,13 @@ Il rilevamento immesso dall'utente è rappresentato sotto forma di "stringa", pe
 		\item La "tupla"/lista contenente la latitudine in formato D.M.G internazionale viene convertita in formato decimale applicando la seguente formula: \\Decimale = (Gradi + (((Secondi / 60) + Primi) / 60) * (-1) se il Segno è  S). 
 		\item La "tupla"/lista contenente la longitudine in formato D.M.G internazionale viene convertita in formato decimale applicando la seguente formula: \\Decimale = (Gradi + (((Secondi / 60) + Primi) / 60) * (-1) se il Segno è  W).
 		\item Le coordinate così ottenute vengono riunite all'interno di una "tupla"/lista così definita: (latitudine decimale, longitudine decimale)/[latitudine decimale, longitudine decimale].
+		\item Stampa a video della latitudine in formato decimale e della longitudine in formato decimale.
 	\end{enumerate}
 
 	\item Calcolo della distanza compresa tra i due rilevamenti inseriti: 
 	\begin{enumerate}
 		\item Data una coppia di rilevamenti in formato decimale rispettivamente denominati "A" e "B", la distanza compresa tra i due rilevamenti viene calcolata applicando la seguente formula: \\$Distanza(A, B) = R * \arccos(\sin(latA * \pi / 180) * \sin(latB * \pi / 180) + \cos(latA * \pi / 180) * \cos(latB * \pi / 180) * \cos((lonA - lonB) * \pi / 180)). $
+		\item Stampa a video della distanza compresa tra la coppia di rilevamenti dati.
 	\end{enumerate}
 
 	\item  Calcolo dell'angolo di rotta diretto e inverso tra i due rilevamenti inseriti:
@@ -137,6 +139,8 @@ Il rilevamento immesso dall'utente è rappresentato sotto forma di "stringa", pe
 		Nel caso in cui le latitudini dei due rilevamenti siano identiche, il $\Delta Lon$ viene calcolato in questo modo:\\ $\Delta Lon = \pi / 180 * 0.000000001.$
 		\item Si calcola quindi l'angolo di rotta diretto tra i due rilevamenti applicando la seguente formula:\\ $ Angolo Diretto = atan2((\Delta Lon * \pi / 180), (abs(\Delta\Phi))) / \pi * 180.$\\
 		\item L'angolo di rotta inverso tra i due rilevamenti è calcolato applicando la seguente formula: \\ $ Angolo Inverso = Angolo Diretto + 180.$\\
+		\item Stampa a video dell'angolo di rotta diretto tra i due rilevamenti considerati.
+		\item Stampa a video dell'angolo di rotta inverso tra i due rilevamenti considerati.
 	\end{enumerate}
 
 \end{enumerate}
@@ -284,6 +288,8 @@ Il rilevamento immesso dall'utente è rappresentato sotto forma di "stringa", pe
 	\includegraphics[width=0.9\textwidth]{Prolog_Tests/10-Calculation_of_Distant_Coordinates_Check}
 \newpage
 
+% Commento multilinea usato.
+\/*
 \section{Considerazioni Finali}
 \raggedright
 
@@ -303,4 +309,6 @@ Nel programma Prolog a differenza del programma Haskell è necessario verificare
 Inoltre nel programma Prolog a differenza del programma Haskell l'inserimento di una stringa contenente degli spazi comporta che quest'ultima sia compresa tra apici oppure tra il simbolo dell'apostrofo, in modo che l'inserimento venga considerato come un "dato atomico",  facendo sì che i caratteri di spazio non rappresentino più un problema d'interpretazione.
 Il programma Haskell è stato diviso in moduli utilizzando la sintassi messa a disposizione dal linguaggio, mentre il programma Prolog è stato diviso in più file che vengono caricati utilizzando il predicato "consult", siccome il linguaggio Prolog non mette a disposizione una sintassi per la dichiarazione dei moduli.\\
 Sia nel caso del programma Haskell che del programma Prolog è stata effettuata la verifica della correttezza dei risultati restituiti utilizzando la piattaforma \href{https://www.sunearthtools.com/it/tools/distance.php}{"SunEarthTools.com"}.
+
+*/
 \end{document}
