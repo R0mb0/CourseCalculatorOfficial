@@ -107,8 +107,8 @@ get_latitude(List, Final_list) :-
     number_chars(Primes, D),
     take(14, List, E),
     drop(8, E, F),
-    number_chars(seconds, F),
-    Final_list = [Sign, Degrees, Primes, seconds].
+    number_chars(Seconds, F),
+    Final_list = [Sign, Degrees, Primes, Seconds].
 
 /*Transform the input string containing the longitude part into a longitude list, [sign, degrees, primes, seconds].
  * Input: A list.
@@ -130,8 +130,8 @@ get_longitude(List, Final_list) :-
     number_chars(Primes, D),
     take(15, List1, E),
     drop(9, E, F),
-    number_chars(seconds, F),
-    Final_list = [Sign, Degrees, Primes, seconds].
+    number_chars(Seconds, F),
+    Final_list = [Sign, Degrees, Primes, Seconds].
 
 /*Verify if the coordinate body is right,
    (in this case the body is the entire coordinate without the sign & degrees),
@@ -142,15 +142,15 @@ verify_coordinate_body(List) :-
     list(List),
     nth(3, List, Primes),
     verify_primes(Primes),
-    nth(4, List, seconds),
-    verify_seconds(seconds).
+    nth(4, List, Seconds),
+    verify_seconds(Seconds).
 verify_coordinate_body(List) :-
     nth(3, List, Primes),
     \+(verify_primes(Primes)),
     throw(error(wrong_primes_in, List, verify_coordinate_body/1)).
 verify_coordinate_body(List) :-
-    nth(4, List, seconds),
-    \+(verify_seconds(seconds)),
+    nth(4, List, Seconds),
+    \+(verify_seconds(Seconds)),
     throw(error(wrong_seconds_in, List, verify_coordinate_body/1)).
 
 /*Convert the sign of the coordinate into a number for the decimal conversion the coordinate.
@@ -170,8 +170,8 @@ convert_to_decimal(List, Return_num) :-
     check_sign(Sign, Sign1),
     nth(2, List, Degrees),
     nth(3, List, Primes),
-    nth(4, List, seconds),
-    A is seconds / 60,
+    nth(4, List, Seconds),
+    A is Seconds / 60,
     B is Primes + A,
     C is B / 60,
     D is C + Degrees,

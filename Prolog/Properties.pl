@@ -3,10 +3,6 @@
 /*Calculate the distance between two detections in decimal form.
  * Input: Two lists containing detections in decimal form.
  * Output: An integer number that represent the distance (in Km) between the two detections.*/
-distance([], _, _) :-
-    throw(error(empty_first_input_list, distance/3)).
-distance(_, [], _) :-
-    throw(error(empty_second_input_list, distance/3)).
 distance(List1, List2, Return_num) :-
     list(List1),
     list(List2),
@@ -34,13 +30,60 @@ distance(List1, List2, Return_num) :-
     N is acos(M),
     Return_num is 6372.795477598 * N.
 
+/*Calculate the delta phi between two latitudes.
+* Input: Two numbers containing the two latitudes. 
+* Output: A number containing the delta phi between two latitudes.*/
+phi(Lat1, Lat2, Phi) :-
+    number(Lat1),
+    number(Lat2),
+    Lat2 == Lat1,
+    Phi is pi / 180 * 0.000000001.
+phi(Lat1, Lat2, Phi) :-
+    number(Lat1),
+    number(Lat2),
+    Lat2 \== Lat1,
+    B is pi / 4,
+    C is Lat1 / 2,
+    D is C + B,
+    E is tan(D),
+    F is Lat2 / 2,
+    G is F + B,
+    H is tan(G),
+    I is H / E,
+    Phi is log(I).
+
+/*Verify if delta longitude must be normalized.
+* Input: A number containing the delta longitude. 
+* Output: A number containing the correct delta longitude.*/
+dlong_normalizer(Dlong, Normalized) :-
+    Dlong > 180,
+    Normalized is Dlong mod 180.
+dlong_normalizer(Dlong, Normalized) :- 
+    Dlong =< 180,
+    Normalized = Dlong.
+
+/*Calculate the delta longitude between two longitudes.
+* Input: Two numbers containing the two longitudes. 
+* Output: A number containing the delta longitude between two longitudes.*/
+dlong(Long1, Long2, Dlong) :-
+    number(Long1),
+    number(Long2),
+    Long2 == Long1,
+    Dlong is pi / 180 * 0.000000001.
+dlong(Long1, Long2, Dlong) :-
+    number(Long1),
+    number(Long2),
+    Long2 \== Long1,
+    A is pi / 180,
+    L is Long1 - Long2,
+    M is abs(L), 
+    N is M * A,
+    dlong_normalizer(N, Dlong).
+
+
 /*Calculate the direction between two detections in decimal form.
  * Input: Two lists containing detections in decimal form.
  * Output: An integer number that represent the direction (in degrees) between the two detections.*/
-direction([], _, _) :-
-    throw(error(empty_first_input_list, direction/3)).
-direction(_, [], _) :-
-    throw(error(empty_second_input_list, direction/3)).
 direction(List1, List2, Return_num) :-
     list(List1),
     list(List2),
@@ -55,31 +98,8 @@ direction(List1, List2, Return_num) :-
     A is pi / 180,
     Lat1n is Lat1 * A,
     Lat2n is Lat2 * A,
-    (Lat2 == Lat1 -> 
-        Phi is pi / 180 * 0.000000001
-    ;
-        B is pi / 4,
-        C is Lat1n / 2,
-        D is C + B,
-        E is tan(D),
-        F is Lat2n / 2,
-        G is F + B,
-        H is tan(G),
-        I is H / E,
-        Phi is log(I)
-    ),
-    (Long2 == Long1 ->
-        Lon is pi / 180 * 0.000000001
-    ;
-        L is Long1 - Long2,
-        M is abs(L), 
-        N is M * A,
-        (N > 180 -> 
-            Lon is N mod 180
-        ;
-            Lon = N
-        )
-    ),
+    phi(Lat1n, Lat2n, Phi),
+    dlong(Long1, Long2, Lon),
     O is abs(Phi),
     P is atan2(Lon, O),
     Return_num is P / pi * 180.
@@ -87,10 +107,6 @@ direction(List1, List2, Return_num) :-
 /*Calculate the inverse direction between two detections in decimal form.
  * Input: Two lists containing detections in decimal form.
  * Output: An integer number that represent the inverse direction (in degrees) between the two detections.*/
-inverse_direction([], _, _) :-
-    throw(error(empty_first_input_list, inverse_direction/3)).
-inverse_direction(_, [], _) :-
-    throw(error(empty_second_input_list, inverse_direction/3)).
 inverse_direction(List1, List2, Return_num) :-
     list(List1),
     list(List2),

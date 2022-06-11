@@ -64,7 +64,7 @@ Scrivere un programma Haskell e un programma Prolog che, dato l'inserimento di d
 \section{Analisi del Problema}
 \subsection{Dati di Ingresso del Problema}
 Per ciascuna delle quattro operazioni, i dati d'ingresso del problema sono rappresentati da due rilevamenti satellitari in formato di coordinata unica nella quale la latitudine e la longitudine sono rappresentate in formato D.M.G internazionale. \\
-Esempio di rilevamento accettato: N 40 45 36.000 - E 073 59 2.400.
+Esempio di rilevamento accettato: N 40 45 36.000 - E 073 59 2.400
 
 \subsection{Dati di Uscita del Problema}
 Per ogni inserimento di una coppia di rilevamenti nel formato prima specificato i dati d'uscita del problema, rispettivamente alle ultime tre operazioni descritte all'interno della sezione di specifica del problema, sono: il risultato della conversione delle coordinate del primo rilevamento inserito dal formato D.M.G internazionale a quello decimale, il risultato della conversione delle coordinate del secondo rilevamento inserito dal formato D.M.G internazionale a quello decimale, il risultato del calcolo della distanza compresa tra i due rilevamenti inseriti, il risultato del calcolo dell'angolo di rotta diretto che unisce i due rilevamenti, il risultato del calcolo dell'angolo di rotta inverso che unisce i due rilevamenti. 
@@ -85,7 +85,7 @@ Dato l'inserimento di due rilevamenti nel formato prima specificato, le operazio
 	\item Calcolo dell'angolo di rotta diretto e inverso tra i due rilevamenti inseriti; data una coppia di rilevamenti rispettivamente denominati "A" e "B" e data la condizione che la latitudine e la longitudine siano diverse l'angolo di rotta diretto e inverso compresa è definita come: \\
 	$\Delta\Phi = \ln( \tan(latB * \pi / 360 + \pi / 4 ) / \tan(latA * \pi / 360 + \pi / 4 )). $\\
 	$ \Delta Lon = abs(lonA - lonB). $ \\
-	$ Angolo Diretto = atan2((\Delta Lon * \pi / 180), (abs(\Delta\Phi))) / \pi * 180.$\\
+	$ Angolo Diretto = atan2((\Delta Lon * \pi / 180), (abs(\Delta\Phi))) / \pi * 180. $\\
 	$ Angolo Inverso = Angolo Diretto + 180.$\\
 	Nel caso in cui le latitudini dei due rilevamenti siano identiche:\\
 	$\Delta\Phi = \pi / 180 * 0.000000001.$\\
@@ -97,13 +97,13 @@ Dato l'inserimento di due rilevamenti nel formato prima specificato, le operazio
 \section{Progettazione dell'Algoritmo}
 \subsection{Scelte di Progetto}
 Il rilevamento immesso dall'utente è rappresentato sotto forma di "stringa", pertanto il rilevamento è gestibile come una lista di caratteri di tipo "char". Le varie parti d'interesse sulla lista, vengono estratte a delle posizioni precise (per esempio si suppone che il segno della prima coordinata si trovi nella posizione uno della lista).  Siccome le informazioni vengono estratte dalla lista a delle posizioni precedentemente stabilite (quindi senza controllare la presenza di certi simboli per la ricerca delle parti d'interesse sulla lista), si controlla che quest'ultima sia precisamente di trentadue caratteri (considerando anche gli spazi) e nel formato corretto.\\
- Un'ulteriore decisione architetturale è stata presa nella gestione delle singole coordinate, infatti la latitudine e la longitudine individuate all'interno della lista di caratteri "char" vengono convertite rispettivamente in due "tuple" distinte definite come segue: (Char, Integer, Integer, Float) ovvero (Segno, Gradi, Primi, Secondi), in modo da poter semplificare l'implementazione delle funzioni/predicati atti alla conversione delle coordinate dal formato D.M.G internazionale al formato decimale. Nel caso specifico del Prolog al posto delle "tuple" vengono utilizzate delle liste formate da elementi atomici definite come segue:  [Segno, Gradi, Primi, Secondi].
+Un'ulteriore decisione architetturale è stata presa nella gestione delle singole coordinate, infatti la latitudine e la longitudine individuate all'interno della lista di caratteri "char" vengono convertite rispettivamente in due "tuple" distinte definite come segue: (Char, Integer, Integer, Float) ovvero (Segno, Gradi, Primi, Secondi), in modo da poter semplificare l'implementazione delle funzioni/predicati atti alla conversione delle coordinate dal formato D.M.G internazionale al formato decimale. Nel caso specifico del Prolog al posto delle "tuple" vengono utilizzate delle liste formate da elementi atomici definite come segue:  [Segno, Gradi, Primi, Secondi].
  
 \subsection{Passi dell'Algoritmo}
 %I passi dell'algoritmo sono diversi a seconda del tipo d'operazione:
 \begin{enumerate}
 	\item Acquisizione del primo rilevamento.
-	\item  Acquisizione del secondo rilevamento.
+	\item Acquisizione del secondo rilevamento.
 	\item Verifica se i due rilevamenti acquisiti sono differenti.
 	
 	\item Controllo della validità dei rilevamenti:
