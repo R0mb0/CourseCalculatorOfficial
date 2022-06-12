@@ -80,7 +80,7 @@ Dato l'inserimento di due rilevamenti nel formato prima specificato, le operazio
 	
 	\item Calcolo della distanza compresa tra i due rilevamenti inseriti;  data una coppia di rilevamenti rispettivamente denominati "A" e "B" la distanza compresa è definita come: \\
 	$Distanza(A, B) = R * \arccos(\sin(latA * \pi / 180) * \sin(latB * \pi / 180) + \cos(latA * \pi / 180) * \cos(latB * \pi / 180) * \cos((lonA - lonB) * \pi / 180)). $\\
-	dove R rappresenta il raggio della Terra.
+	Dove R rappresenta il raggio della Terra.
 	
 	\item Calcolo dell'angolo di rotta diretto e inverso tra i due rilevamenti inseriti; data una coppia di rilevamenti rispettivamente denominati "A" e "B" e data la condizione che la latitudine e la longitudine siano diverse l'angolo di rotta diretto e inverso compresa è definita come: \\
 	$\Delta\Phi = \ln( \tan(latB * \pi / 360 + \pi / 4 ) / \tan(latA * \pi / 360 + \pi / 4 )). $\\
@@ -97,18 +97,18 @@ Dato l'inserimento di due rilevamenti nel formato prima specificato, le operazio
 \section{Progettazione dell'Algoritmo}
 \subsection{Scelte di Progetto}
 Il rilevamento immesso dall'utente è rappresentato sotto forma di "stringa", pertanto il rilevamento è gestibile come una lista di caratteri di tipo "char". Le varie parti d'interesse sulla lista, vengono estratte a delle posizioni precise (per esempio si suppone che il segno della prima coordinata si trovi nella posizione uno della lista).  Siccome le informazioni vengono estratte dalla lista a delle posizioni precedentemente stabilite (quindi senza controllare la presenza di certi simboli per la ricerca delle parti d'interesse sulla lista), si controlla che quest'ultima sia precisamente di trentadue caratteri (considerando anche gli spazi) e nel formato corretto.\\
-Un'ulteriore decisione architetturale è stata presa nella gestione delle singole coordinate, infatti la latitudine e la longitudine individuate all'interno della lista di caratteri "char" vengono convertite rispettivamente in due "tuple" distinte definite come segue: (Char, Integer, Integer, Float) ovvero (Segno, Gradi, Primi, Secondi), in modo da poter semplificare l'implementazione delle funzioni/predicati atti alla conversione delle coordinate dal formato D.M.G internazionale al formato decimale. Nel caso specifico del Prolog al posto delle "tuple" vengono utilizzate delle liste formate da elementi atomici definite come segue:  [Segno, Gradi, Primi, Secondi].
+Un'ulteriore decisione architetturale è stata presa nella gestione delle singole coordinate, infatti la latitudine e la longitudine individuate all'interno della lista di caratteri "char" vengono convertite rispettivamente in due "tuple" distinte definite come segue: (Char, Integer, Integer, Float) ovvero (Segno, Gradi, Primi, Secondi), in modo da poter semplificare l'implementazione delle funzioni/predicati atti alla conversione delle coordinate dal formato D.M.G internazionale al formato decimale. Nel caso specifico del Prolog al posto delle "tuple" vengono utilizzate delle liste formate da elementi "atomici" definite come segue:  [Segno, Gradi, Primi, Secondi].
  
 \subsection{Passi dell'Algoritmo}
 %I passi dell'algoritmo sono diversi a seconda del tipo d'operazione:
 \begin{enumerate}
 	\item Acquisizione del primo rilevamento.
 	\item Acquisizione del secondo rilevamento.
-	\item Verifica se i due rilevamenti acquisiti sono differenti.
+	\item Verifica se i due rilevamenti acquisiti siano differenti.
 	
 	\item Controllo della validità dei rilevamenti:
 	\begin{enumerate}
-		\item La "stringa" contenente il rilevamento inserito dall'utente viene convertita esplicitamente in una lista di caratteri "char".
+		\item La "stringa" contenente il rilevamento inserito dall'utente viene convertita in una lista di caratteri "char".
 		\item Viene valutato se la lista così ottenuta sia composta da trentadue elementi e nel formato corretto verificando che gli spazi siano posizionati nelle  seguenti posizioni della lista: 2, 5, 8, 15, 17, 19, 23, 25. Nel caso in cui la lista non possieda trentadue elementi oppure i caratteri di spazio non siano posizionati correttamente viene restituito un messaggio d'errore.
 		\item La lista viene manipolata per estrarre le informazioni relative alla latitudine da inserire nella "tupla"/lista che rappresenta la latitudine in formato D.M.G internazionale.
 		\item La lista iniziale viene nuovamente manipolata per estrarre le informazioni relative alla longitudine da inserire nella "tupla"/lista che rappresenta la longitudine in formato D.M.G internazionale.
@@ -135,8 +135,8 @@ Un'ulteriore decisione architetturale è stata presa nella gestione delle singol
 		\item  Si considera una coppia di rilevamenti in formato decimale rispettivamente denominati "A" e "B".
 		\item Si calcola il $\Delta\Phi$ dei rilevamenti nel caso in cui le latitudini dei suddetti siano diverse applicando la seguente formula:\\ $\Delta\Phi = \ln( \tan(latB * \pi / 360 + \pi / 4 ) / \tan(latA * \pi / 360 + \pi / 4 )). $\\
 		Nel caso in cui le latitudini dei due rilevamenti siano identiche, il $\Delta\Phi$ viene calcolato in questo modo:\\ $\Delta\Phi = \pi / 180 * 0.000000001.$
-		\item Si calcola il $\Delta Lon$ dei rilevamenti nel caso in cui le latitudini dei suddetti siano diverse applicando la seguente formula:\\ $ \Delta Lon = abs(lonA - lonB). $\\
-		Nel caso in cui le latitudini dei due rilevamenti siano identiche, il $\Delta Lon$ viene calcolato in questo modo:\\ $\Delta Lon = \pi / 180 * 0.000000001.$
+		\item Si calcola il $\Delta Lon$ dei rilevamenti nel caso in cui le longitudini dei suddetti siano diverse applicando la seguente formula:\\ $ \Delta Lon = abs(lonA - lonB). $\\
+		Nel caso in cui le longitudini dei due rilevamenti siano identiche, il $\Delta Lon$ viene calcolato in questo modo:\\ $\Delta Lon = \pi / 180 * 0.000000001.$
 		\item Si calcola quindi l'angolo di rotta diretto tra i due rilevamenti applicando la seguente formula:\\ $ Angolo Diretto = atan2((\Delta Lon * \pi / 180), (abs(\Delta\Phi))) / \pi * 180.$\\
 		\item L'angolo di rotta inverso tra i due rilevamenti è calcolato applicando la seguente formula: \\ $ Angolo Inverso = Angolo Diretto + 180.$\\
 		\item Stampa a video dell'angolo di rotta diretto tra i due rilevamenti considerati.
