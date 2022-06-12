@@ -30,9 +30,9 @@ distance(List1, List2, Return_num) :-
     N is acos(M),
     Return_num is 6372.795477598 * N.
 
-/*Calculate the delta phi between two latitudes.
-* Input: Two numbers containing the two latitudes. 
-* Output: A number containing the delta phi between two latitudes.*/
+/*Calculate the delta phi.
+* Input: Two numbers containing the latitudes. 
+* Output: A number containing the delta phi.*/
 phi(Lat1, Lat2, Phi) :-
     number(Lat1),
     number(Lat2),
@@ -62,9 +62,9 @@ dlong_normalizer(Dlong, Normalized) :-
     Dlong =< 180,
     Normalized = Dlong.
 
-/*Calculate the delta longitude between two longitudes.
-* Input: Two numbers containing the two longitudes. 
-* Output: A number containing the delta longitude between two longitudes.*/
+/*Calculate the delta longitude.
+* Input: Two numbers containing the longitudes. 
+* Output: A number containing the delta longitude.*/
 dlong(Long1, Long2, Dlong) :-
     number(Long1),
     number(Long2),
