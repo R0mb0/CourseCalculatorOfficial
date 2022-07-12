@@ -1,5 +1,5 @@
 Detections Properties Calculator V1.0
-Warning: the detections must be in D.M.G format and inserted into the program like: `N 40 45 36.000 - E 073 59 2.400`.
+Warning: the detections must be in D.M.G format and inserted into the program like: `N 40 45 36.000 - E 073 59 02.400`.
 Insert the first detection...
 `N 43 54 17.000 - E 012 54 40.000`.
 Insert the second detection...
